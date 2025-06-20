@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3.1D Viewer</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <div class="app-container">
+    <header class="app-header">
+
+    <h1><i class="fas fa-cube"></i>3.1D <span class="developer-credit">by @felicxo</span>    <span id="filename-display"></span>
+</h1>
+      <div class="view-mode-buttons">
+        <button id="wireframeBtn" class="btn-icon" title="Wireframe">
+          <i class="fas fa-border-style"></i>
+        </button>
+        <button id="monochromeBtn" class="btn-icon" title="Monochrome">
+          <i class="fas fa-square"></i>
+        </button>
+        <button id="shadedBtn" class="btn-icon" title="Shaded">
+          <i class="fas fa-shapes"></i>
+        </button>
+        <button id="renderedBtn" class="btn-icon active" title="Rendered">
+          <i class="fas fa-cube"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="main-content">
+            <button id="toggleSidebar" class="sidebar-toggle">
+        <i class="fas fa-chevron-left"></i>
+      </button>
+      <aside class="sidebar">
+        <div class="upload-section">
+          <h3><i class="fas fa-cloud-upload-alt"></i> Upload Model</h3>
+          <div class="upload-area">
+            <div class="file-upload">
+              <input type="file" id="modelFile" accept=".obj">
+              <div class="upload-prompt">
+                <i class="fas fa-file-upload"></i>
+                <p>Drag & drop your OBJ file here</p>
+                <span>or click to browse</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="model-info">
+          <h3><i class="fas fa-info-circle"></i> Model Info</h3>
+          <div id="modelDimensions">
+            <p>Dimensions: <span>Not loaded</span></p>
+            <p>Size: <span>0 mm</span></p>
+          </div>
+        </div>
+
+        <div class="tools-section">
+          <h3><i class="fas fa-tools"></i> Tools</h3>
+          <div class="tool-options">
+            <label class="toggle-option">
+              <input type="checkbox" id="toggleGrid" checked>
+              <span>Show Grid</span>
+            </label>
+            <label class="toggle-option">
+              <input type="checkbox" id="toggleAxes" checked>
+              <span>Show Axes</span>
+            </label>
+          </div>
+          <div class="tool-buttons">
+            <button id="measureBtn" class="btn-tool" title="Measure">
+              <i class="fas fa-ruler"></i>
+            </button>
+              <button id="angleBtn" class="btn-tool" title="Measure Angle">
+                <i class="fas fa-angle-left"></i>
+              </button>
+            <button id="rotateBtn" class="btn-tool" title="Auto Rotate">
+              <i class="fas fa-undo"></i>
+            </button>
+            <button id="resetBtn" class="btn-tool" title="Reset View">
+              <i class="fas fa-sync-alt"></i>
+            </button>
+          </div>
+          <div class="standard-views">
+            <h4>Standard Views:</h4>
+            <div class="view-buttons">
+              <button class="btn-view" data-view="front"><i class="fas fa-arrow-up"></i> Front</button>
+              <button class="btn-view" data-view="top"><i class="fas fa-arrow-down"></i> Top</button>
+              <button class="btn-view" data-view="side"><i class="fas fa-arrow-right"></i> Side</button>
+            </div>
+          </div>
+        </div>
+
+<div class="library-section">
+  <h3><i class="fas fa-book-open"></i> Model Library</h3>
+  <div class="library-tabs">
+    <button class="tab-btn active" data-tab="models">3D Models</button>
+    <button class="tab-btn" data-tab="articles">Articles</button>
+  </div>
+  
+  <div class="tab-content" id="models-tab">
+
+<div class="library-search">
+  <input type="text" placeholder="Search models..." id="modelSearch">
+</div>
+
+    <ul class="model-list">
+    <li class="model-item" data-model="car">
+      <span class="model-name">Sports Car</span>
+      <button class="btn-load" title="Load model">Load</button>
+    </li>
+        <li class="model-item" data-model="cube2x2">
+      <span class="model-name">Cube 2x2</span>
+      <button class="btn-load" title="Load model">Load</button>
+    </li>
+
+    </div>
+    <!-- Добавьте больше карточек -->
+  
+
+    <div class="tab-content" id="articles-tab" style="display:none">
+    <div class="article-card clickable-article" data-article="intro" data-prev="texturing-guide" data-next="advanced">
+      <h4>Что такое формат .OBJ</h4>
+      <p>как устроен этот популярный международный формат </p>
+    </div>
+    <!-- Добавьте больше статей -->
+  <div class="article-card clickable-article" data-article="advanced" data-prev="intro" data-next="texturing-guide">
+    <h4>3D-моделирование в повседневной жизни</h4>
+    <p>как технологии меняют наш быт</p>
+  </div>
+  
+  <div class="article-card clickable-article" data-article="texturing-guide" data-prev="advanced" data-next="intro">
+    <h4>ИИ превращает 3D-сканы в CAD-модели за минуту</h4>
+    <p>революция в производстве</p>
+  </div>
+</div>
+</div>
+
+      </aside>
+
+      <div class="viewer-container">
+        <div id="viewer"></div>
+        <div class="viewer-controls">
+          <button id="zoomInBtn" class="btn-control" title="Zoom In">
+            <i class="fas fa-search-plus"></i>
+          </button>
+          <button id="zoomOutBtn" class="btn-control" title="Zoom Out">
+            <i class="fas fa-search-minus"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/loaders/OBJLoader.js"></script>
+  <script src="/js/app.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</body>
+</html>

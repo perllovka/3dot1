@@ -1,0 +1,25 @@
+{
+  "name": "sketchup-viwer",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/three": "^0.177.0",
+    "axios": "^1.10.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "express-fileupload": "^1.5.1",
+    "form-data": "^4.0.3",
+    "marked": "^15.0.12",
+    "orbit-controls": "^1.2.4",
+    "three": "^0.132.2",
+    "three-stdlib": "^2.36.0"
+  },
+  "description": ""
+}
