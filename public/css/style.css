@@ -694,8 +694,33 @@ body {
 }
 
 
-/* Адаптивность для мобильных устройств */
+
+/* Мобильные устройства (до 768px) */
 @media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    width: 100%;
+    height: 40vh;
+    overflow-y: auto;
+  }
+  
+  .viewer-container {
+    height: 60vh;
+  }
+  
+  .tool-buttons {
+    flex-wrap: wrap;
+  }
+  
+  .btn-tool, .btn-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 0.8rem;
+  }
+  
   .article-modal {
     left: 0;
     width: 100%;
@@ -749,3 +774,19 @@ body {
   border: 1px solid #eaeaea;
 }
 
+.view-mode-buttons, .tool-buttons {
+  display: flex;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0.5rem;
+    flex-wrap: wrap;
+  }
+  
+  #filename-display {
+    display: none; // Скрываем имя файла на маленьких экранах
+  }
+}

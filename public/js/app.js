@@ -25,8 +25,17 @@ function init() {
   camera.position.z = 5;
   
   // Рендерер
-  renderer = new THREE.WebGLRenderer({ antialias: true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer = new THREE.WebGLRenderer({ 
+    antialias: true,
+    powerPreference: "high-performance"
+  });
+  
+  // Адаптивный размер
+  updateRendererSize();
+  window.addEventListener('resize', updateRendererSize);
+
+
+
   renderer.shadowMap.enabled = true;
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   document.getElementById('viewer').appendChild(renderer.domElement);
@@ -64,6 +73,16 @@ function init() {
   
   // Анимация
   animate();
+}
+
+
+function updateRendererSize() {
+  const width = Math.min(window.innerWidth, 1024); // Ограничение для мобилок
+  const height = window.innerHeight * 0.8; // 80% высоты экрана
+  
+  camera.aspect = width / height;
+  camera.updateProjectionMatrix();
+  renderer.setSize(width, height);
 }
 
 // Настройка UI
@@ -764,6 +783,12 @@ function onWindowResize() {
 
 function animate() {
   requestAnimationFrame(animate);
+  
+  if ('ontouchstart' in window) {
+    requestAnimationFrame(() => {
+      setTimeout(animate, 1000 / 30); // Ограничение до 30 FPS
+    });
+  }
   
   if (isRotating && model) model.rotation.y += 0.005;
   controls.update();
